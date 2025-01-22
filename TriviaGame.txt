@@ -1,0 +1,33 @@
+
+Totally Trivial Trivia!
+
+clique Start
+starts game and counter ticking down
+
+Time Remaining
+What was the first full length CGI movie?
+O A Bug's Life, O Monsters Inc, O Toy Story, O The Lion King
+
+Which of these is NOT a name of one of the Spice Girls?
+O Sporty Spice, O Fred Spice, Scary Spice, O Posh Spice
+
+Which NBA team won the most titls in the 90s?
+O New York Knicks, O Portland Trailblazers, O Los Angeles Lakers, O Chicago Bulls
+
+Which group released the hit song, "Smells Like Teen Spirit"?
+O Nirvana, O Backstreet Boys, O The Offspring, O No Doubt
+
+Which popular Disney Movie featured the song, "Circle of Life"?
+O The Lion King, O Aladdin, Mulan, O Toy Story
+
+
+When time gets to 0(zero) or when user click's Done button, the game 
+calculates the number of correct and incorrect answers
+
+All Done!
+Correct Answers: 0
+Incorrect Answers: 4
+Unanswered: 4
+
+Only lets you choose one answer per question
+Theme and style how you choose
