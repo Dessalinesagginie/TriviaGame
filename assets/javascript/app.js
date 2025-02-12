@@ -11,9 +11,9 @@ $(document).ready(function() {
     correctAnswer: "C" // Corrected answer to Toy Story
   };
 
-  let number = 10;
+  let number = 5;
   let intervalId;
-  let timeLeft = 10;
+  let timeLeft = 5;
   let answered = false;
 
   $("#question").text(questionData.question);
