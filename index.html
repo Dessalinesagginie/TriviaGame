@@ -6,28 +6,41 @@
     <title>Document</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+    <style>
+        /* #quiz-container {
+          border: 1px solid #ccc;
+          padding: 20px;
+          margin: 20px auto; /* Center the quiz */
+          /* width: 400px; Adjust width as needed */
+        /* } */
+        .answer-option {
+          margin-bottom: 10px;
+          cursor: pointer; /* Make options clickable */
+        } */
+      </style>
 </head>
 <body>
-
+    
     <h1>Totally Trivial Trivia!</h1>
     
     <button id="start">Start</button>
-    <button id="resume">Resume</button>
-    <button id="stop">Stop</button>
-   
+    
     <p>Time Remaining</p>
     
     <div id="show-number"></div>
     
     <br>
     
-    What was the first full length CGI movie?
-
-    <br>
-
-    O A Bug's Life, O Monsters Inc, O Toy Story, O The Lion King
-
+    <div id="quiz-container">
+    <h3 id="question"></h3>
+    <div id="answers">
+      <div class="answer-option" data-choice="A">A. <span id="answer-a"></span></div>
+      <div class="answer-option" data-choice="B">B. <span id="answer-b"></span></div>
+      <div class="answer-option" data-choice="C">C. <span id="answer-c"></span></div>
+      <div class="answer-option" data-choice="D">D. <span id="answer-d"></span></div>
+    </div>
+    <div id="result"></div> </div>
+   
     <!-- <script src>"assets/javascript/apps.js"</script> -->
     <script src="assets/javascript/app.js"></script>
 

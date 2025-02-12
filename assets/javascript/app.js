@@ -1,40 +1,76 @@
-$("button").click(addTask);
 
-function addTask() {
+$(document).ready(function() {
+  const questionData = {
+    question: " What was the first full length CGI movie?",
+    answers: {
+      A: "A Bug's Life",
+      B: "Monsters Inc",
+      C: "Toy Story",
+      D: "Phantom Menace"
+    },
+    correctAnswer: "C" // Corrected answer to Toy Story
+  };
 
-  console.log("Des")
+  let number = 10;
+  let intervalId;
+  let timeLeft = 10;
+  let answered = false;
 
-}
+  $("#question").text(questionData.question);
+  $("#answer-a").text(questionData.answers.A);
+  $("#answer-b").text(questionData.answers.B);
+  $("#answer-c").text(questionData.answers.C);
+  $("#answer-d").text(questionData.answers.D);
 
-       
-var number = 100;
-var intervalId;
+  $("#start").on("click", startTimer); // Start button now triggers timer
 
-$("#start").on("click", startTimer); // Start button triggers timer
-$("#resume").on("click", startTimer); // Resume also triggers timer
-$("#stop").on("click", stopTimer);     // Stop button stops timer
+  $(".answer-option").click(function() {
+    if (!answered) {
+      answered = true;
+      clearInterval(intervalId); // Stop timer when answer is clicked
 
-function startTimer() {  // Renamed for clarity
-    clearInterval(intervalId); // Clear any existing timer
-    intervalId = setInterval(decrement, 1000);
-    number = 100; // Reset the number when Start or Resume is clicked
-    $("#show-number").html("<h2>" + number + "</h2>"); // Update the display
-}
+      const selectedChoice = $(this).data("choice");
+      $("#result").empty();
 
-function decrement() {
-    number--;
-    $("#show-number").html("<h2>" + number + "</h2>");
-
-    if (number === 0) {
-        stopTimer(); // Stop the timer when it reaches 0
-        alert("Time Up!");
-
-        // ***IMPORTANT: This is where you handle what happens when time runs out.***
-        // ... (your game logic here) ...
+      if (selectedChoice === questionData.correctAnswer) {
+        $("#result").html("<span style='color: green;'>Correct!</span>");
+      } else {
+        $("#result").html("<span style='color: red;'>Incorrect. The correct answer is " + questionData.correctAnswer + ".</span>");
+      }
     }
-}
+  });
 
-function stopTimer() { // Separate function for stopping
+  function startTimer() {
     clearInterval(intervalId);
-}
- 
+    timeLeft = 10; // Reset timeLeft
+    number = 10;  // Reset number
+    answered = false; // Reset answered flag for new question
+    updateDisplay();
+    intervalId = setInterval(decrement, 1000);
+    $("#result").empty(); // Clear previous result
+  }
+
+  function decrement() {
+    number--;
+    timeLeft--;
+    updateDisplay();
+
+    if (timeLeft < 0) {
+      clearInterval(intervalId);
+      if (!answered) { // Only show "Time's Up!" if not answered
+        $("#result").html("<span style='color: red;'>All Done!</span>");
+      }
+    }
+  }
+
+  function stopTimer() {
+    clearInterval(intervalId);
+  }
+
+  function updateDisplay() {
+    let displayNumber = number < 0 ? 0 : number;
+    $("#show-number").html("<h2>" + displayNumber + "</h2>");
+    $("#timer-display").text(timeLeft);
+  }
+});
+
