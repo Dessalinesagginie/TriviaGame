@@ -1,19 +1,19 @@
 
 $(document).ready(function() {
   const questionData = {
-    question: " What was the first full length CGI movie?",
+    question: "What was the first full length CGI movie?",
     answers: {
       A: "A Bug's Life",
       B: "Monsters Inc",
       C: "Toy Story",
       D: "Phantom Menace"
     },
-    correctAnswer: "C" // Corrected answer to Toy Story
+    correctAnswer: "C" // Correct answer to Toy Story
   };
 
-  let number = 5;
+  let number = 3;
   let intervalId;
-  let timeLeft = 5;
+  let timeLeft = 3;
   let answered = false;
 
   $("#question").text(questionData.question);
@@ -42,8 +42,8 @@ $(document).ready(function() {
 
   function startTimer() {
     clearInterval(intervalId);
-    timeLeft = 10; // Reset timeLeft
-    number = 10;  // Reset number
+    timeLeft = 3; // Reset timeLeft
+    number = 3;  // Reset number
     answered = false; // Reset answered flag for new question
     updateDisplay();
     intervalId = setInterval(decrement, 1000);
