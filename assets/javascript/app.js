@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   const questionData = {
     question: "What was the first full length CGI movie?",
@@ -8,7 +7,7 @@ $(document).ready(function() {
       C: "Toy Story",
       D: "Phantom Menace"
     },
-    correctAnswer: "C" // Correct answer to Toy Story
+    correctAnswer: "C"
   };
 
   let number = 3;
@@ -16,18 +15,22 @@ $(document).ready(function() {
   let timeLeft = 3;
   let answered = false;
 
+  // Populate questions and answers
   $("#question").text(questionData.question);
   $("#answer-a").text(questionData.answers.A);
   $("#answer-b").text(questionData.answers.B);
   $("#answer-c").text(questionData.answers.C);
   $("#answer-d").text(questionData.answers.D);
 
-  $("#start").on("click", startTimer); // Start button now triggers timer
+  // Hide quiz elements initially
+  $("#question, .answer-option, #show-number, #timer-display, #result").hide();
+
+  $("#start").on("click", startTimer);
 
   $(".answer-option").click(function() {
     if (!answered) {
       answered = true;
-      clearInterval(intervalId); // Stop timer when answer is clicked
+      clearInterval(intervalId);
 
       const selectedChoice = $(this).data("choice");
       $("#result").empty();
@@ -42,35 +45,35 @@ $(document).ready(function() {
 
   function startTimer() {
     clearInterval(intervalId);
-    timeLeft = 3; // Reset timeLeft
-    number = 3;  // Reset number
-    answered = false; // Reset answered flag for new question
+    timeLeft = 5;
+    answered = false;
+    $("#start").hide();
+    $("#question, .answer-option, #show-number, #result").show();
     updateDisplay();
     intervalId = setInterval(decrement, 1000);
-    $("#result").empty(); // Clear previous result
-  }
+    $("#result").empty();
+}
 
-  function decrement() {
-    number--;
-    timeLeft--;
-    updateDisplay();
+function decrement() {
+  timeLeft--;
+  updateDisplay();
 
-    if (timeLeft < 0) {
+  if (timeLeft < 0) {
       clearInterval(intervalId);
-      if (!answered) { // Only show "Time's Up!" if not answered
-        $("#result").html("<span style='color: red;'>All Done!</span>");
+      if (!answered) {
+          $("#result").html("<span style='color: red;'>All Done!</span>");
       }
-    }
   }
+}
 
-  function stopTimer() {
-    clearInterval(intervalId);
-  }
-
-  function updateDisplay() {
-    let displayNumber = number < 0 ? 0 : number;
-    $("#show-number").html("<h2>" + displayNumber + "</h2>");
-    $("#timer-display").text(timeLeft);
-  }
+function updateDisplay() {
+  let displayTime = timeLeft < 0 ? 0 : timeLeft;
+  $("#show-number").html("<h2>Time Remaining: " + displayTime + "</h2>");
+}
 });
+
+
+
+
+
 
