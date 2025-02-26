@@ -1,79 +1,70 @@
 $(document).ready(function() {
   const questionData = {
-    question: "What was the first full length CGI movie?",
-    answers: {
-      A: "A Bug's Life",
-      B: "Monsters Inc",
-      C: "Toy Story",
-      D: "Phantom Menace"
-    },
-    correctAnswer: "C"
+      question: "What was the first full length CGI movie?",
+      answers: {
+          A: "A Bug's Life",
+          B: "Monsters Inc",
+          C: "Toy Story",
+          D: "Phantom Menace"
+      },
+      correctAnswer: "C"
   };
 
-  let number = 3;
+  let timeLeft = 15;
   let intervalId;
-  let timeLeft = 3;
   let answered = false;
 
-  // Populate questions and answers
-  $("#question").text(questionData.question);
-  $("#answer-a").text(questionData.answers.A);
-  $("#answer-b").text(questionData.answers.B);
-  $("#answer-c").text(questionData.answers.C);
-  $("#answer-d").text(questionData.answers.D);
+  // Initialize quiz content
+  $(".question").text(questionData.question);
+  $(".answer[data-choice='A'] .answer-text").text(questionData.answers.A);
+  $(".answer[data-choice='B'] .answer-text").text(questionData.answers.B);
+  $(".answer[data-choice='C'] .answer-text").text(questionData.answers.C);
+  $(".answer[data-choice='D'] .answer-text").text(questionData.answers.D);
 
   // Hide quiz elements initially
-  $("#question, .answer-option, #show-number, #timer-display, #result").hide();
+  $("#timer, #quiz-container").hide();
 
-  $("#start").on("click", startTimer);
+  $("#start").click(startGame);
 
-  $(".answer-option").click(function() {
-    if (!answered) {
-      answered = true;
-      clearInterval(intervalId);
-
-      const selectedChoice = $(this).data("choice");
-      $("#result").empty();
-
-      if (selectedChoice === questionData.correctAnswer) {
-        $("#result").html("<span style='color: green;'>Correct!</span>");
-      } else {
-        $("#result").html("<span style='color: red;'>Incorrect. The correct answer is " + questionData.correctAnswer + ".</span>");
+  $(".answer").click(function() {
+      if (!answered && timeLeft > 0) {
+          answered = true;
+          clearInterval(intervalId);
+          
+          $(".answer").removeClass("selected");
+          $(this).addClass("selected");
+          
+          const isCorrect = $(this).data("choice") === questionData.correctAnswer;
+          $("#end-message")
+              .html(isCorrect ? "Correct!" : "Incorrect! Correct answer was " + questionData.correctAnswer)
+              .show();
+          
+          setTimeout(() => showEndScreen(), 2000);
       }
-    }
   });
 
-  function startTimer() {
-    clearInterval(intervalId);
-    timeLeft = 5;
-    answered = false;
-    $("#start").hide();
-    $("#question, .answer-option, #show-number, #result").show();
-    updateDisplay();
-    intervalId = setInterval(decrement, 1000);
-    $("#result").empty();
-}
-
-function decrement() {
-  timeLeft--;
-  updateDisplay();
-
-  if (timeLeft < 0) {
-      clearInterval(intervalId);
-      if (!answered) {
-          $("#result").html("<span style='color: red;'>All Done!</span>");
-      }
+  function startGame() {
+      $("#start, #end-message").hide();
+      $("#timer, #quiz-container").show();
+      timeLeft = 15;
+      answered = false;
+      updateTimer();
+      intervalId = setInterval(() => {
+          timeLeft--;
+          updateTimer();
+          if (timeLeft <= 0) {
+              clearInterval(intervalId);
+              showEndScreen();
+          }
+      }, 1000);
   }
-}
 
-function updateDisplay() {
-  let displayTime = timeLeft < 0 ? 0 : timeLeft;
-  $("#show-number").html("<h2>Time Remaining: " + displayTime + "</h2>");
-}
+  function updateTimer() {
+      $("#timer").text(`Time Remaining: ${timeLeft}`);
+  }
+
+  function showEndScreen() {
+      $("#timer, #quiz-container").hide();
+      $("#end-message").html("All Done!").show();
+  }
 });
-
-
-
-
-
-

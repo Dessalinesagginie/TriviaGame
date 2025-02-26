@@ -1,79 +1,81 @@
 body {
-        
-    position: relative; 
     background-color: pink;
     color: white;
     font-family: sans-serif;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    min-height: 80vh; /* Ensure full viewport height */
-    margin: 0; /* Remove default margins */
+    text-align: center;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
 }
 
 h1 {
-    
+    padding: 20px 0;
+    margin: 0;
+    background: #b1bf18;
+}
+
+#start {
     position: absolute;
-    top: 10px; 
-    left: 50%; 
-    transform: translateX(-50%);
-    padding: 50px 0;
-    margin: 0;
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #eee;
-    text-align: center;
-    background:#b1bf18;
-}
-
-h2 {
-    
-    position: absolute;
-    top: 325px; 
-    left: 50%; 
-   
-    padding: 10px 0;
-    margin: 0;
-    margin-bottom: 30px;
-    font-size: 20px;
-    color: #eee;
-    text-align: center;
-    background:#e370b5;
-}
-
-
-button {
-    position: relative; 
-    left: 45%; 
-    padding: 10px 0;
-    margin: 0;
-    margin-bottom: 70px;
-    font-size: 20px;
-    color: #eee;
-    text-align: relative;
-    background:#bf187f;
-}
-
-p {
-    position: relative; 
-    left: 1%; 
-    padding: -1px 0;
-    margin: 0;
-    margin-bottom: 40px;
-    font-size: 20px;
-    color: #eee;
-    text-align: center;
-    background:#bf187f;
-}
- 
-#show-number {
-    position: absolute;
-    top: 140px; /* About 1 inch below title (10px title top + 50px padding + 80px spacing) */
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 20px;
+    background: #bf187f;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#timer {
     font-size: 24px;
-    color: #eee;
-    background: #e370b5;
+    margin: 20px 0;
+}
+
+#quiz-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.question {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.answers {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.answer {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 2px solid white;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.answer-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    margin-right: 10px;
+}
+
+.selected .answer-box {
+    background: #b1bf18;
+}
+
+#end-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    display: none;
 }
